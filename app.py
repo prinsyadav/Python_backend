@@ -5,7 +5,13 @@ import requests
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={
+    r"/api/*": {
+        "origins": ["https://my-gemini-app-seven.vercel.app"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # Load API Key from environment variables (HIGHLY RECOMMENDED)
 API_KEY = os.environ.get("GEMINI_API_KEY")
